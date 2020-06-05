@@ -3,24 +3,31 @@ var fs = require('fs')
 
 const express = require('express');
 const app = express();
-const port = 8001;
-const uploadedDir = __dirname + '/uploaded/';
-const downloadDir = __dirname + '/download/';
-app.use(express.static(__dirname));
+const port = 8002;
+var uploadedPath = __dirname + '/uploaded/';
+var downloadPath = __dirname + '/download/';
+
+app.use(express.static('/'));
 
 app.get('/', function(req, res){
     res.sendFile(__dirname + '/index.html')
 })
 
-app.get('/success', function(req, res){
-    res.sendFile(__dirname + '/success.html')
-})
+
+
+app.get('/node.html',function(req,res){
+    let nazwa = req.query.nazwa;
+    console.log("name: ", nazwa);
+    var downPath= downloadPath+nazwa; 
+    res.download(downPath);
+    });
+
 
 app.post('/fileupload', function (req, res) {
-    form = new formidable.IncomingForm({uploadDir: uploadedDir,path: uploadedDir});
+    form = new formidable.IncomingForm({uploadDir: uploadedPath,path: uploadedPath});
     form.parse(req, function(err, fields, files){
         var oldpath = files.filetoupload.path;
-        var newpath = downloadDir + files.filetoupload.name;
+        var newpath = downloadPath + files.filetoupload.name;
         console.log(oldpath);
         console.log(newpath);
         fs.rename(oldpath, newpath, function (err) {
@@ -31,15 +38,12 @@ app.post('/fileupload', function (req, res) {
     })
 })
 
-fs.readdirSync(downloadDir).forEach(file => {
+fs.readdirSync(downloadPath).forEach(file => {
   console.log(file);
 });
 
-app.get('/node.html', function(req, res){
-    var filename = req.query.nazwa;
-    var fullpath = downloadDir + filename;
-    res.download(fullpath);
-});
+
+
 
 
 app.listen(port, () => console.log(`http://localhost:${port}`))
