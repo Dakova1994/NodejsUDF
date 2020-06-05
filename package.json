@@ -1,0 +1,16 @@
+{
+  "name": "projectnodejszadanie2",
+  "version": "1.0.0",
+  "description": "zadanie 2 ",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "formidable": "^1.2.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Patryk Cejba\\",
+  "license": "ISC"
+}

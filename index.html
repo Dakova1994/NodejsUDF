@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>File upload and download</title>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+
+      $(function(){
+        $('#btn').click(function(){
+            $.ajax({url: "/download", type: 'GET', success: function(result){
+                
+            }});
+        })
+      })
+
+    </script>
+</head>
+<body>
+<h1>Wgrywanie pliku na server:</h1>
+<form action="fileupload" method="post" enctype="multipart/form-data">
+    <input type="file" name="filetoupload"><br>
+    <input type="submit">
+</form>
+
+
+
+</div>
+ 
+</body>
+</html>
